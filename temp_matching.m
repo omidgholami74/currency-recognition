@@ -9,8 +9,8 @@ function corrs = temp_matching(templates,folder,img)
         [height, width, k]=size(template);
         templateWidth = width;
         templateHeight = height;
-        channelToCorrelate = 1;  % Use the red channel.
-        correlationOutput = normxcorr2(template, img);
+          % Use the red channel.
+        correlationOutput = normxcorr2(template(:,:,1), img(:,:,1));
 
         % Find out where the normalized cross correlation image is brightest.
         [maxCorrValue, maxIndex] = max(abs(correlationOutput(:)));
@@ -25,17 +25,13 @@ function corrs = temp_matching(templates,folder,img)
                     (boxRect(1) <100 || boxRect(1)>300) ...
                    && (boxRect(3)> boxRect(4)) && maxCorrValue >= 0.6 && boxRect(4) <=50 ...
                    && boxRect(1) > 0 && boxRect(2) > 0
-           
-%                 axis on; % Show tick marks giving pixels
-%                  hold on; % Don't allow rectangle to blow away image.
+               %  figure;imshow(img);
+               % axis on; % Show tick marks giving pixels
+               %  hold on; % Don't allow rectangle to blow away image.
                 % rectangle('position', boxRect, 'edgecolor', 'g', 'linewidth',2);
                  values = [values,maxCorrValue]; 
             end
-   end
-
-% %      imshow(img); 
-  
-    
+    end
     corrs=values;
 
 end

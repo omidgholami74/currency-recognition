@@ -1,4 +1,4 @@
-function image = crop_background(img)
+function image = crop_background(img,name)
   imgGray=rgb2gray(img);
   % find edges
   edges=edge(imgGray,'canny',0.4);
@@ -8,9 +8,6 @@ function image = crop_background(img)
   row2 = max(rows);
   col1 = min(columns);
   col2 = max(columns);
-  handles = guidata(gcf);
-  set(handles.text21,"string","Y1 : "+num2str(row1)+ "      "+"Y2 : "+"      "+num2str(row2) ...
-      +newline+ "X1 : "+num2str(col1)+"       "+"X2 : "+"     "+ num2str(col2));
   [height_img,width_img,k]=size(img);
   w=col2-col1;
   h =row2-row1;
@@ -49,6 +46,9 @@ function image = crop_background(img)
     else
         image =img;
     end
+%     imwrite(image,name);
+%     mkdir ('cropped');
+%     movefile(name,'cropped');
     %imshow(image);
 
 end

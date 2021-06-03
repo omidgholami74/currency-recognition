@@ -1,16 +1,16 @@
-function check = check_size(img)
+function half = check_size(img)
 
         [height ,width,k] =size(img);
         
         if width < 1.5*height
             if 1.1*height> width
-                check= 'half';
+                half= 'half';
             else
-                check='hasBackground';
+                half='hasBackground';
             end
            
         else
-            check ='complete';
+            half ='complete';
         end
 end
 
